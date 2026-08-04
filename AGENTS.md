@@ -1,52 +1,67 @@
 # AGENTS.md — Chinese Erotic Fiction Writing Toolkit
 
-This repo is a toolkit for writing Chinese adult (H) fiction. Full instructions in `CLAUDE.md`.
+White-paper toolkit for Chinese adult (H) fiction. Full instructions in `CLAUDE.md`.
 
 ## Quick Start
 
-Install the harness CLI:
 ```bash
 pip install -e .
 ```
 
-## What You Can Do Here
+## What This Toolkit Does
 
-**Write fiction**: Read `CLAUDE.md` for the full methodology. Key rule: investigate user preferences BEFORE writing — never assume defaults.
+**Write fiction**: Read `CLAUDE.md` for the full methodology. Core rule: investigate preferences BEFORE writing — every user is a blank page.
 
-**Index a corpus**: `novel index` scans local .txt novel collections, filters by quality, scores technique density, and builds a searchable SQLite index.
+**Index a corpus**: `novel index -d <dir>` scans local .txt novel collections. Quality filters, technique scoring, play-type classification → SQLite.
 
-**Discover play patterns**: `novel extract` uses LLM to scan the indexed corpus and identify play types (露出/调教/偷情/etc.), extracting atomic templates with iron rules, escalation axes, and scene templates as shareable YAML files.
+**Calibrate quality**: `novel calibrate -a <anchor_file>` computes technique baselines from known-good works.
 
-**Cross-combine plays**: `novel combine` merges playbook templates to create novel variants. Use `novel combine --suggest` to get LLM recommendations.
+**Count words**: `novel wordcount <file>` — per-chapter stats with pass/fail.
 
-**Generate chapters**: `novel generate -p "露出,古风" -s "御花园" -w 5000` — DeepSeek API-powered, segmented generation with auto-continue until word count target is met.
+**Discover plays**: The Agent reads prompt templates from `harness/prompt_templates.py`, samples indexed corpus passages, and uses its own LLM to discover play patterns and extract atomic templates.
 
-**Count words**: `novel wordcount <file>` — per-chapter word count with pass/fail threshold.
+**Cross-combine plays**: Agent uses combine prompts to fuse playbook templates into novel variants.
 
-## Core Principles
+## Privacy (P0)
 
-1. **Investigation-driven**: Play type, voice, word count, genre — all determined per user, never hardcoded.
-2. **Body first**: Show through sensation, not narration.
-3. **Sound + liquid**: Always paired, never dry action.
-4. **Multi-dimensional**: Each body part described across 3-4 dimensions.
-5. **Climax fleshed out**: Full body reaction chain, never one sentence.
+- `sessions/` is `.gitignore`d — never leaves the user's machine
+- All reference files de-personalized — no real character/scene names in repo
+- Each user's kinks, characters, and play preferences are local only
+
+## Three-Layer Architecture
+
+| Layer | What | Public |
+|---|---|---|
+| L1 Universal | `SKILL.md` + `references/` — pure technique | Yes |
+| L2 Accumulated | Anonymous cross-user patterns | Yes |
+| L3 Sessions | `sessions/` — per-user capsule (prefs + feedback + style fingerprint) | **No** |
+
+## Session Learning
+
+Each session makes the skill smarter for that user:
+1. First use → investigate → create capsule
+2. Returning → read capsule → skip basics
+3. Feedback → append log → update style fingerprint
+4. Satisfied passages → extract density → auto-match next time
+5. Over time → fingerprint converges to user's taste
 
 ## Key Files
 
 | File | Purpose |
 |---|---|
 | `CLAUDE.md` | Complete agent instructions |
-| `SKILL.md` | Claude Code skill definition |
-| `references/carnal-writing-techniques.md` | High-density writing techniques |
-| `references/quiet-exposure-techniques.md` | Exhibitionism play example |
+| `SKILL.md` | Skill definition + session learning spec |
+| `references/carnal-writing-techniques.md` | High-density technique reference |
+| `references/quiet-exposure-techniques.md` | Exhibitionism playbook template (example) |
 | `scripts/wordcount.py` | Per-chapter word counter |
-| `scripts/batch_insert.py` | Anchor-based batch text insertion |
-| `harness/` | Python CLI tool modules |
+| `scripts/batch_insert.py` | Anchor-based text insertion |
+| `harness/prompt_templates.py` | LLM prompt templates |
+| `harness/cli.py` | CLI entry (local tools only) |
 
-## Configuration
+## Core Rules
 
-All config via `~/.fiction-harness/config.yaml` or environment variables (`DEEPSEEK_API_KEY`, `DEEPSEEK_BASE_URL`). No hardcoded paths in source.
-
-## P0 Design Rule
-
-This toolkit does NOT bind to any fixed play type, author voice, or word count. All preferences are investigation outputs, not built-in defaults. The example content marked 「当前用户〔男〕」 is from a previous user and must NOT be assumed for new users.
+1. **White paper**: Nothing pre-bound — all preferences from investigation
+2. **Body first**: Show through sensation, not narration
+3. **Sound + liquid**: Always paired, never dry
+4. **Multi-dimensional**: Each body part across 3-4 dimensions
+5. **Climax full chain**: Never one sentence
