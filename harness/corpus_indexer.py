@@ -88,7 +88,11 @@ def hard_filter(passage: str) -> tuple[bool, str]:
 # --- SimHash dedup ---
 
 def simhash(text: str) -> int:
-    """64-bit simhash for Chinese text. Tokenizes by bigram characters."""
+    """63-bit simhash for Chinese text. Tokenizes by bigram characters.
+
+    Masked to 63 bits so the value fits SQLite's signed 64-bit INTEGER
+    (a 64-bit hash with the top bit set overflows the column type).
+    """
     tokens = [text[i:i + 2] for i in range(len(text) - 1)]
     weights = [0] * 64
     for token in tokens:
@@ -102,7 +106,7 @@ def simhash(text: str) -> int:
     for i in range(64):
         if weights[i] > 0:
             result |= (1 << i)
-    return result
+    return result & 0x7FFFFFFFFFFFFFFF
 
 
 def hamming(a: int, b: int) -> int:

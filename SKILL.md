@@ -95,7 +95,11 @@ custom_rules: []       # 用户特有的写作铁律
 - **升级轴**（从初级到高级的递进阶段）
 - **场景模板**（典型场景的描写框架）
 
-通用玩法模板参考：`references/quiet-exposure-techniques.md`（脱敏后的露出玩法示例，展示玩法模板的结构，不绑定任何具体角色）。
+通用玩法模板参考（均为脱敏后的通用模板，只展示"玩法文档应包含哪些要素"，不绑定任何具体角色，实际玩法由勘察确定）：
+- `references/quiet-exposure-techniques.md` — 悄悄露出（隐秘暴露）：差一步暴露的紧张感
+- `references/tech-toy-play-techniques.md` — 情趣玩具/远程控制：断崖式高潮与档位即权力
+- `references/domination-training-techniques.md` — 调教/主奴（权力交换）：高潮许可制度与奖惩循环
+- `references/group-play-techniques.md` — 多人/群交：空间调度与角色分工
 
 ## 章节结构
 

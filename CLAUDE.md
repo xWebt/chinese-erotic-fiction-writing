@@ -86,8 +86,12 @@ Use `scripts/batch_insert.py`. Anchor = unique original sentence (20-60 chars). 
 
 ## Reference Files
 
+All reference files are de-personalized technique templates extracted from corpus (no real names/paths).
 - `references/carnal-writing-techniques.md` — High-density technique: organ dimensions, sound/liquid pairing, climax chains
-- `references/quiet-exposure-techniques.md` — Exhibitionism playbook example (de-personalized template, shows structure)
+- `references/quiet-exposure-techniques.md` — Exhibitionism (悄悄露出): near-miss exposure tension
+- `references/tech-toy-play-techniques.md` — Sex toys / remote control: edge-play & power of the dial
+- `references/domination-training-techniques.md` — Dom/sub (调教): orgasm-permission system & reward/punish loop
+- `references/group-play-techniques.md` — Group / orgy: spatial choreography & role division
 
 ## Critical Pitfalls
 
