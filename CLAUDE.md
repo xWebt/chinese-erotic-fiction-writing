@@ -1,108 +1,100 @@
-# Chinese Erotic Fiction Writing — AI Agent Instructions
+# Chinese Erotic Fiction Writing — Agent Instructions
 
-This repo is a comprehensive toolkit for writing Chinese adult (H) fiction. It provides:
-- **Writing methodology** — rules, templates, pitfalls (see `references/`)
-- **Harness CLI** — Python tools for corpus indexing, play pattern extraction, chapter generation (see `harness/`)
-- **Batch scripts** — word counting, anchor-based passage insertion (see `scripts/`)
+This repo is a **white-paper toolkit** for writing Chinese adult (H) fiction.
+It provides methodology, not defaults. Every user opens a blank page.
 
-## When to Use This Toolkit
+## Architecture (Three Layers)
 
-- User asks to write / expand / rewrite Chinese H fiction
-- User provides an outline and wants it fleshed out
-- User complains output is too short / not erotic enough / too much filler
-- User wants to analyze their local novel corpus for play patterns
+| Layer | Location | Content | Public? |
+|---|---|---|---|
+| L1 Universal | `SKILL.md` + `references/` | Pure technique methodology | Yes |
+| L2 Accumulated | `references/` (de-personalized) | Cross-user pattern extraction | Yes |
+| L3 Session Capsule | `sessions/` (local only) | Per-user preferences, feedback log, style fingerprint | **Never** |
 
-## Mandatory Investigation (do this FIRST for any new user)
+## Privacy Design (P0)
 
-Every user has different preferences. Never assume defaults. Before writing anything, ask:
+- `sessions/` is in `.gitignore` — never committed, never pushed
+- All reference files are de-personalized (角色名 → [女主]/[男主], 场景 → [地点])
+- Each user's kinks, characters, and play preferences stay local
+- The GitHub repo contains zero user identities
 
-1. **Gender / author voice**: Male user → raw, direct male voice (器官直呼名: 骚穴/大奶/肉棒). Female user → atmosphere-first, sensual, psychological. If unsure, ask.
-2. **Play type / kink**: Exhibitionism? BDSM? Group? Pure love? Infidelity? Uniform? Record preferences and TABOOS.
-3. **Genre & format**: Historical? Modern? Xianxia? First or third person? H-scene ratio? Words per chapter target.
-4. **Style references**: Any reference works? Use `scripts` phrase extraction to learn their style.
-5. Save investigation results to session memory. If results conflict with any pre-existing preferences, investigation wins.
-6. This investigation also applies to batch expansion of existing novels.
+## Mandatory Investigation (FIRST thing for any new user)
 
-## Core Writing Rules (applies regardless of play type)
+Ask these questions before writing anything. Never assume defaults:
 
-- **Body reaction first**: 发烫/战栗/湿透/咬唇/腿软/收缩/喷水/脚趾蜷缩 — show through body, don't narrate.
-- **Orgasm must be fleshed out**: 痉挛 → 弓起 → 脚尖绷直 → 收缩 → 喷涌 → 眼前发白 → 脱力. Never one-line it.
-- **Sound + liquid always together**: 啧啧/咕叽咕叽/噗嗤噗嗤 + 汩汩/顺着大腿根往下淌.
-- **Multi-dimensional description**: Breasts — shape/touch/nipple changes/deformation/sucking reaction. Pussy — labia/clitoris/entrance/juices/contraction. At least 3-4 dimensions per scene.
-- **Organ naming follows investigation**: Male voice → direct (骚穴/大奶/肉棒/浓精). Female voice → softer terms possible.
-- **Minimal environmental filler**: 2-3 sentences to set scene, then straight to H/body/psychology.
-- **Chapter fullness**: Respect word count target. When asked to "expand", actually add new content, don't rephrase existing.
-- **Delivery format**: Plain markdown, chapter title then body, end with hook. No changelog in files.
+1. **Gender / Voice**: Male → direct, raw (器官直呼名). Female → atmospheric, sensual. Ask if unsure.
+2. **Play Types & Taboos**: What kinks? What's forbidden? Record taboos as hard constraints.
+3. **Genre & Format**: Setting, perspective, H-scene ratio, words per chapter.
+4. **Style References**: Any reference works to learn from?
 
-## Chapter Structure
+Save results to `sessions/{user_id}.yaml`. Re-read this file on subsequent sessions.
 
-```
-Scene intro (2-3 lines) → Setup / tension planting → H main body (2-4 rounds, fully fleshed) → Climax resolution → Ending hook (tease next chapter)
-```
+## Session Capsule (The Learning Loop)
 
-For word count guarantee: break each chapter into 3-4 scene segments, 1200-2000 words each, with a "detail checklist" of must-include keywords/actions per chapter.
+Each session makes the skill smarter for that specific user:
 
-## Using the Harness CLI
+1. **First use** → investigation → create capsule → write preferences
+2. **Returning** → read capsule → skip basics → ask "what's new this time?"
+3. **Feedback received** → parse the correction → append to feedback_log → update style_fingerprint
+4. **Passage satisfied** → extract technique density → update fingerprint → next gen auto-matches
+5. **Over time** → feedback_log = personalized pitfall list → fingerprint converges to user's taste
 
-The `novel` tool provides automated assistance. Install with `pip install -e .` from the repo root.
+Capsule structure is documented in `SKILL.md` session learning section.
 
-### `novel init`
-First-time setup. Prompts for DeepSeek API key and corpus directory. Writes `~/.fiction-harness/config.yaml`.
+## Core Writing Rules
 
-### `novel index`
-Scan the local novel corpus, build a searchable SQLite index with quality filtering and play-type classification.
+- **Body first**: 发烫/战栗/湿透/咬唇/腿软/收缩/喷水/脚趾蜷缩. Show, don't narrate.
+- **Orgasm full chain**: 痉挛 → 弓起 → 脚尖绷直 → 收缩 → 喷涌 → 眼前发白 → 脱力. Never one line.
+- **Sound + liquid always paired**: 啧啧/咕叽/噗嗤 + 汩汩/顺着淌. No "dry action."
+- **Multi-dimensional**: Each body part across 3-4 dimensions (shape/touch/sound/sight/state). See `references/carnal-writing-techniques.md`.
+- **Organ naming per investigation**: No default terms. Ask first.
+- **Minimal filler**: 2-3 lines for scene setting, then straight to H/body/psychology.
+- **Chapter structure**: Intro (2-3 lines) → setup → H body (2-4 rounds) → climax → hook.
 
-### `novel calibrate`
-Compute technique density baselines from anchor works. Calibrates scoring thresholds.
+## Local Tools (harness/ CLI)
 
-### `novel extract`
-LLM-driven discovery: scan indexed corpus → identify play types → extract atomic templates (iron rules + escalation axis + scene templates + sentence banks) as shareable YAML files.
+Pure local operations, no API dependency:
 
-### `novel combine`
-Cross-combine playbook templates to create novel play variants. Use `--suggest` to get LLM recommendations for interesting combinations.
+- `novel index -d <corpus_dir>` — Scan .txt novel library, build searchable index
+- `novel calibrate -a <anchor_file> ...` — Calibrate quality thresholds from known-good works
+- `novel wordcount <file>` — Per-chapter word count
+- `novel stats` — Index statistics
 
-### `novel generate`
-Generate a full chapter using DeepSeek API:
-- Generates a scene-segmented outline
-- Generates each scene independently (3-4 segments)
-- Auto-continues any segment that falls short of word target (up to 4 rounds)
-- Optionally injects style references from indexed corpus
+Install: `pip install -e .`
 
-Example: `novel generate -p "露出,古风" -s "御花园假山后" -w 5000 -c "女主媚儿, 男主燕凌霄"`
+## Prompt Templates
 
-### `novel wordcount`
-Count words per chapter in a markdown novel file.
+`harness/prompt_templates.py` contains structured prompts for:
+- Play type discovery from corpus passages
+- Atomic playbook extraction (iron rules + escalation axes + scene templates)
+- Cross-combining playbooks into novel variants
+- Chapter outline and scene generation
+- Style reference injection
 
-### `novel stats`
-Show corpus index statistics.
+The Agent reads these templates and executes them with its own LLM backend.
 
 ## Key Workflows
 
-### Revision workflow
-When user gives feedback: sync suggestions to outline → delete old text → rebuild from outline → self-review → deliver.
+### Revision
+Sync feedback → update outline → regenerate → self-review → deliver. Never patch.
 
 ### Multi-session writing
-Maintain `接续进度.md` (progress tracking file) in the workspace. Update at end of each session. Read it first when resuming. 2-3 chapters per session.
+Maintain `接续进度.md` in workspace. Update each session end, read first on resume.
 
-### Batch expansion (anchored insertion)
-Built into `scripts/batch_insert.py`. Use when expanding multiple chapters from skeleton to target word count. Key rules:
-- Anchors must be unique full sentences from ORIGINAL text (20-60 chars), never from previously inserted text
-- Insert in descending position order
-- Verify with `wordcount.py` after each round
-- Never use `patch` for content containing quotes — use `write_file` for standalone Python scripts instead
+### Batch expansion
+Use `scripts/batch_insert.py`. Anchor = unique original sentence (20-60 chars). Insert in descending order. Verify with `novel wordcount` after each round.
 
 ## Reference Files
 
-- `references/carnal-writing-techniques.md` — High-density carnal writing techniques extracted from reference works
-- `references/quiet-exposure-techniques.md` — Quiet/public exhibitionism play template (example, don't assume it applies to all users)
+- `references/carnal-writing-techniques.md` — High-density technique: organ dimensions, sound/liquid pairing, climax chains
+- `references/quiet-exposure-techniques.md` — Exhibitionism playbook example (de-personalized template, shows structure)
 
 ## Critical Pitfalls
 
-- **P0 design principle**: This toolkit must NOT bind to any specific play type, voice, or word count. Everything is investigation-driven.
-- Don't deliver half-finished work — self-review before showing user
-- Outline chapter numbers must match body text
-- Environmental/setup content ≤ 40% per chapter
-- When expanding, actually ADD new paragraphs, don't rewrite same text
-- Person pronoun consistency: 她/他/朕/本王 frequently get mixed up during insertion — proofread
-- Never use large-block patch replacements (over half a chapter)
-- Anchor nesting: never use text containing old anchors as new insertions
+- **White paper rule (P0)**: Never bind to any play type, voice, or word count. Everything from investigation.
+- Don't deliver half-finished work. Self-review: climax count, chapter numbering, pronoun consistency.
+- Environment/setup ≤ 40% per chapter.
+- When expanding: ADD new content, don't rephrase existing.
+- Person pronoun consistency: 她/他/朕/本王 get mixed during insertion. Proofread.
+- Anchor nesting: never use previously-inserted text as new anchor.
+- Never use large-block patch (over half chapter). Patch only for ≤200 char insertions.
