@@ -1,10 +1,9 @@
 [project]
 name = "chinese-fiction-harness"
 version = "0.1.0"
-description = "CLI harness for Chinese erotic fiction writing with DeepSeek API"
+description = "Local CLI tools for Chinese erotic fiction writing assistance"
 requires-python = ">=3.10"
 dependencies = [
-    "openai>=1.0.0",
     "jieba>=0.42.1",
     "pyyaml>=6.0",
     "rich>=13.0.0",
