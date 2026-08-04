@@ -54,7 +54,7 @@ def get_playbook_summaries(playbooks_dir: str) -> list[str]:
     """Get one-line summaries of all playbooks in a directory."""
     summaries = []
     for f in Path(playbooks_dir).glob("*.yaml"):
-        with open(f) as fp:
+        with open(f, encoding="utf-8") as fp:
             data = yaml.safe_load(fp)
         name = data.get("name", f.stem)
         rules = data.get("iron_rules", [])

@@ -65,7 +65,7 @@ def calibrate(db, anchor, strictness, output):
 
     if output:
         import json
-        with open(output, "w") as f:
+        with open(output, "w", encoding="utf-8") as f:
             json.dump({"baseline": baseline, "thresholds": thresholds}, f, ensure_ascii=False, indent=2)
         console.print(f"[green]Baseline saved to {output}[/green]")
 
@@ -76,24 +76,24 @@ def calibrate(db, anchor, strictness, output):
 @click.argument("filepath")
 @click.option("--threshold", "-t", type=int, default=5000, help="Pass threshold (default: 5000)")
 def wordcount(filepath, threshold):
-    """Count words per chapter in a markdown novel file."""
+    """Count words per chapter in a novel file (.txt or markdown)."""
     import re
     import os
     from rich.table import Table
 
     if not os.path.exists(filepath):
-        console.print(f"[red]File not found: {filepath}[/red]")
-        return
+        raise click.ClickException(f"File not found: {filepath}")
 
     with open(filepath, encoding="utf-8") as f:
         text = f.read()
 
-    chapters = re.split(r"### (?:第\d+章|番外)", text)
-    names = re.findall(r"### ((?:第\d+章|番外)[^\n]*)", text)
+    # Accept both plain-text (第N章 XXX) and markdown (### 第N章 XXX) headers,
+    # matching the .txt delivery format used by the writing workflow.
+    chapters = re.split(r"(?:###\s*)?(?:第\d+章|番外)", text)
+    names = re.findall(r"(?:###\s*)?((?:第\d+章|番外)[^\n]*)", text)
 
     if not names:
-        console.print("[yellow]No chapter titles found (### 第N章 or ### 番外X)[/yellow]")
-        return
+        raise click.ClickException("No chapter titles found (第N章 / ### 第N章 / 番外X)")
 
     table = Table(title=f"Word Count: {filepath}")
     table.add_column("Chapter", style="cyan")
@@ -128,12 +128,12 @@ def wordcount(filepath, threshold):
 @click.option("--db", default="corpus.db", help="Index DB path")
 def stats(db):
     """Show corpus index statistics."""
+    import os
     import sqlite3
     from rich.table import Table
 
-    if not __import__("os").path.exists(db):
-        console.print(f"[red]Index DB not found: {db}[/red]")
-        return
+    if not os.path.exists(db):
+        raise click.ClickException(f"Index DB not found: {db}")
 
     conn = sqlite3.connect(db)
     total = conn.execute("SELECT COUNT(*) FROM passages").fetchone()[0]

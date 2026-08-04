@@ -25,10 +25,14 @@ def main():
     threshold = int(sys.argv[2]) if len(sys.argv) > 2 else 5000
     text = open(sys.argv[1], encoding="utf-8").read()
 
-    # Support both markdown (###) and plain text chapter headers
-    # Try plain text format first, then markdown fallback
-    chapters = re.split(r"(?:###\s*)?(?:第\d+章|番外\d*[：:])", text)
-    names = re.findall(r"(?:###\s*)?((?:第\d+章|番外\d*[：:]?)[^\n]*)", text)
+    # Chapter headers: 第N章 or 番外[数字]：标题.
+    # Split and name regexes must stay consistent, or titles/body misalign.
+    # 番外 REQUIRES digits and/or a delimiter (：or :) — bare "番外" is not a header.
+    # 第N章 stays Arabic-numeral here; Chinese-numeral chapters are handled by
+    # the line-anchored fallback below (avoids matching 第十三章 mid-sentence).
+    title_re = r"(?:###\s*)?(?:第\d+章|番外[一二三四五六七八九十\d]*[：:])"
+    chapters = re.split(title_re, text)
+    names = re.findall(r"(?:###\s*)?((?:第\d+章|番外[一二三四五六七八九十\d]*[：:])[^\n]*)", text)
 
     if not names:
         # Try single-chapter file (just a title at the start)

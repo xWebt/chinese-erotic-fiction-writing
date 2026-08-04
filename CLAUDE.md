@@ -79,7 +79,7 @@ The Agent reads these templates and executes them with its own LLM backend.
 Sync feedback → update outline → regenerate → self-review → deliver. Never patch.
 
 ### Multi-session writing
-Maintain `接续进度.md` in workspace. Update each session end, read first on resume.
+Maintain `进度.txt` in the output directory. Update at each session end, read first on resume.
 
 ### Batch expansion
 Use `scripts/batch_insert.py`. Anchor = unique original sentence (20-60 chars). Insert in descending order. Verify with `novel wordcount` after each round.

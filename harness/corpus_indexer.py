@@ -6,6 +6,7 @@ in a SQLite database for fast retrieval.
 """
 
 import hashlib
+import json
 import re
 import sqlite3
 import struct
@@ -149,15 +150,15 @@ CLIMAX_CHAIN = re.compile(
 BYSTANDER_RE = re.compile(
     r"(怀疑|侧目|议论|窃窃私语|偷[看听瞄]|目光|视线|脚步声|逼近|"
     r"差一点|险些|几乎|差点|万一|被人|有人|旁人|"
-    r"(以为|以为).{0,5}(听见|看见|发现|知道)|"
-    r"屏[住息][呼吸]|捂住嘴|咬[住紧][嘴唇牙手背]|不敢[出声响]|强装"
+    r"以为.{0,5}(听见|看见|发现|知道)|"
+    r"屏[住息][呼吸]|捂住嘴|咬[住紧][嘴唇牙手背]|不敢[出声响]|强装)"
 )
 
 # Dialogue with character voice
 DIALOGUE_SCORE = re.compile(
     r"(贱|骚|浪|欠操|想要|快[点些].{0,5}(操|插|干|要|给)|"
     r"老[爷子]|本王|本[座尊]|奴[家婢]|妾身|属下|殿下|"
-    r"叫.{0,5}(出来|大声|给.{0,3}听)"
+    r"叫.{0,5}(出来|大声|给.{0,3}听))"
 )
 
 
@@ -348,7 +349,7 @@ def build_index(
                         passage,
                         sh,
                         total,
-                        str(breakdown),
+                        json.dumps(breakdown, ensure_ascii=False),
                         ",".join(play_types),
                         len(passage),
                         1 if is_anchor else 0,

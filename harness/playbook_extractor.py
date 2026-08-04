@@ -75,7 +75,7 @@ def parse_playbook_to_yaml(play_type: str, llm_output: str) -> str:
 
 def load_playbook(playbook_path: str) -> dict:
     """Load a YAML playbook into a dict."""
-    with open(playbook_path) as f:
+    with open(playbook_path, encoding="utf-8") as f:
         return yaml.safe_load(f)
 
 
