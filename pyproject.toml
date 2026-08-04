@@ -13,6 +13,12 @@ dependencies = [
 [project.scripts]
 novel = "harness.cli:main"
 
+[tool.setuptools]
+# Flat-layout auto-discovery would pick up sessions/ and references/ as
+# top-level packages and abort the build. Only `harness` is a Python package;
+# the rest are data directories the Agent reads from the repo.
+packages = ["harness"]
+
 [build-system]
 requires = ["setuptools>=68.0"]
 build-backend = "setuptools.build_meta"
