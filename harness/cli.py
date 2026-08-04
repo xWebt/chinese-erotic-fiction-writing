@@ -89,11 +89,19 @@ def wordcount(filepath, threshold):
 
     # Accept both plain-text (第N章 XXX) and markdown (### 第N章 XXX) headers,
     # matching the .txt delivery format used by the writing workflow.
-    chapters = re.split(r"(?:###\s*)?(?:第\d+章|番外)", text)
-    names = re.findall(r"(?:###\s*)?((?:第\d+章|番外)[^\n]*)", text)
+    # 番外 requires digits and/or a delimiter (：or :) so bare "番外" in body
+    # text is not mistaken for a header; split/name regexes stay consistent.
+    title_re = r"(?:###\s*)?(?:第\d+章|番外[一二三四五六七八九十\d]*[：:])"
+    chapters = re.split(title_re, text)
+    names = re.findall(r"(?:###\s*)?((?:第\d+章|番外[一二三四五六七八九十\d]*[：:])[^\n]*)", text)
 
     if not names:
-        raise click.ClickException("No chapter titles found (第N章 / ### 第N章 / 番外X)")
+        # Fallback: Chinese-numeral chapter titles (第一章/第十二章) at line start.
+        chapters = re.split(r"(?:^|\n)(?:第[一二三四五六七八九十\d]+章)", text)
+        names = re.findall(r"(?:第[一二三四五六七八九十\d]+章[^\n]*)", text)
+
+    if not names:
+        raise click.ClickException("No chapter titles found (第N章 / ### 第N章 / 番外X / 第一章)")
 
     table = Table(title=f"Word Count: {filepath}")
     table.add_column("Chapter", style="cyan")
