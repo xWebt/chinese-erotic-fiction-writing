@@ -1,0 +1,12 @@
+__pycache__/
+*.pyc
+*.egg-info/
+dist/
+build/
+.venv/
+venv/
+*.db
+corpus_index/
+playbooks/
+combined/
+.DS_Store
