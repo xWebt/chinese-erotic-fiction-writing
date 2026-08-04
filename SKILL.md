@@ -125,3 +125,18 @@ done < /tmp/books50.txt
 - **不要急于交付**：写完审阅完再给用户看（高潮次数与叙述一致、章节号对齐、逻辑连贯）。
 - 群戏/多人章节（如青楼重游、秘宴、朝堂）可以是例外，可以有明面多人戏；普通章节按勘察出的玩法路线走。
 - 人称笔误高发：插入时"她/他/朕/本王"混用，每章补完通读该章确认人称与逻辑。
+
+## Harness 配套工具
+
+本技能附带 Python CLI 工具 `novel`（`harness/` 目录），提供自动化辅助：
+
+- `novel index` — 扫描本地语料库，建索引（质量过滤+技法评分+玩法分类）
+- `novel calibrate` — 用锚点作品校准评分阈值
+- `novel extract` — LLM 驱动发现玩法类型，提取原子模板（铁律+升级轴+场景模板）
+- `novel combine` — 交叉融合玩法模板，产生新玩法变体
+- `novel generate` — DeepSeek API 分段生成章节+自动续写至达标字数
+- `novel wordcount` — 字数统计
+
+安装：`pip install -e .`（在 skill 根目录下运行）
+
+工具通过 `~/.fiction-harness/config.yaml` 或环境变量获取配置（API key、语料目录等），脚本内无硬编码路径。
