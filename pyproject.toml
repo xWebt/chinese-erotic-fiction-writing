@@ -1,7 +1,7 @@
 [project]
 name = "chinese-fiction-harness"
-version = "0.1.0"
-description = "Local CLI tools for Chinese erotic fiction writing assistance"
+version = "1.1.0"
+description = "Corpus-calibrated style toolkit for Chinese adult fiction"
 requires-python = ">=3.10"
 dependencies = [
     "jieba>=0.42.1",
@@ -14,7 +14,7 @@ dependencies = [
 novel = "harness.cli:main"
 
 [tool.setuptools]
-# Flat-layout auto-discovery would pick up sessions/ and references/ as
+# Flat-layout auto-discovery would pick up sessions/, styles/ and playbooks/ as
 # top-level packages and abort the build. Only `harness` is a Python package;
 # the rest are data directories the Agent reads from the repo.
 packages = ["harness"]

@@ -1,0 +1,9 @@
+primary: plain-modern
+modules:
+  voice: first-person-comic
+  intimate_scene: adult-adventure
+  structure: classical-wuxia
+  pacing: readable-fantasy
+  explicit: high-explicit
+status: provisional
+note: Default runtime loads the primary profile and at most one module. Do not load all profiles together.

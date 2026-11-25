@@ -1,0 +1,47 @@
+# Reference schema for style profiles. Profiles are data, not prompts.
+id: example
+label: ""
+role: ""
+status: provisional
+source:
+  title: ""
+  author: ""
+  scenes_read: 0
+  measured_cjk: 0
+voice:
+  pov: ""
+  distance: ""
+  tense: ""
+  narrator_attitude: ""
+sentence:
+  median: 0
+  mean: 0
+  target_range: [0, 0]
+  variation: ""
+paragraph:
+  median: 0
+  one_sentence_ratio: 0
+  short_narrative_run_max: 0
+thresholds:
+  sentence_median: [0, 0]
+  dialogue_ratio: [0, 0]
+  max_short_narrative_run: 0
+  max_action_chain: 0
+  metaphor_per_1000_max: 0
+  prop_exposition_max: 0
+dialogue:
+  ratio: 0
+  texture: ""
+  information_flow: ""
+metaphor:
+  per_1000: 0
+  allowed_sources: []
+scene:
+  opening: ""
+  progression: ""
+  ending: ""
+  erotic_content: ""
+learn:
+  - ""
+do_not_copy:
+  - ""

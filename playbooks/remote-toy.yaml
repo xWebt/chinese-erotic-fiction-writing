@@ -1,0 +1,16 @@
+id: remote-toy
+label: 远程玩具
+aliases: [遥控, 档位控制, 隐藏玩具]
+core_tension: 外在正常与体内/衣下刺激的反差，以及谁掌握开关
+setting: [餐厅, 电影院, 车内, 办公室, 商场]
+progression:
+  - 正常对话中第一次启动
+  - 被迫接话或维持表面镇定
+  - 外界风险升高
+  - 档位变化与权力变化同步
+  - 对方给出或撤回许可
+turn: 设备断连、旁人靠近、操控者故意不关，或被控者主动拿回控制权
+ending_modes: [恢复正常社交, 事后交换规则, 留下未关闭的设备]
+dialogue_vectors: [许可, 催促, 遮掩, 挑衅, 撤回]
+avoid: [只报档位数字, 全程被动, 把设备当唯一刺激]
+profile_modules: [adult-adventure]

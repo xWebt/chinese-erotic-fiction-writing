@@ -1,0 +1,16 @@
+id: stranger-brief
+label: 陌生人短暂互动
+aliases: [临时相识, 一夜关系]
+core_tension: 没有过去，只有当下判断和边界
+setting: [酒吧, 夜班车站, 酒店大堂, 短途旅行]
+progression:
+  - 短暂对视或一句试探
+  - 明确回应
+  - 选择是否继续
+  - 外界或时间制造阻力
+  - 分开或改变计划
+turn: 对方不按预期回应；主角主动离开
+turn_rule: 沉默、跟随和醉酒都不能替代同意
+ending_modes: [留下联系方式, 各自离开, 只记住一个细节]
+avoid: [把坚持写成浪漫, 把不确定写成默认同意]
+profile_modules: []

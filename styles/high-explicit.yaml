@@ -1,0 +1,51 @@
+id: high-explicit
+label: 高强度直白色情
+role: explicitness-module
+status: provisional
+source:
+  note: 从用户提供的公开样本提炼结构，不复制场景、角色和句子
+  scenes_read: 1
+voice:
+  register: direct, spoken, low ornament
+  rhythm: action, physical state, expression, dialogue, next action
+sentence:
+  action_beat: short to medium
+  dialogue_line: short
+  avoid: paragraph-length anatomical inventory
+paragraph:
+  target: short to medium beats with one dominant action each
+  avoid: uniform one-line moan blocks
+body:
+  naming: direct and stable within the scene
+  coverage: organ action, wetness, heat, pressure, visible reaction
+  selection: one or two dominant sensations per beat
+scene:
+  opening: ordinary public pressure before sexual detail
+  progression: action, organ state, expression, dialogue, next choice
+  ending: release followed by a concrete consequence
+expression:
+  include:
+    - eyes and gaze
+    - brows and jaw
+    - mouth, breath and voice
+    - hands, hips and posture
+  rule: expression must answer the previous action
+dialogue:
+  functions:
+    - permission
+    - provocation
+    - exposed loss of control
+    - direction
+    - reaction
+  rule: do not save all dialogue for before or after sex
+learn:
+  - direct organ naming where the POV would use it
+  - action-reaction-dialogue chains
+  - visible facial and vocal changes during sex
+  - pacing that moves through foreplay, penetration, interruption and release
+do_not_copy:
+  - coercive or age-ambiguous scenes
+  - animal or group-extreme material
+  - euphemism chains that obscure the physical action
+  - constant moans or ellipses replacing prose
+  - anatomical inventory without character reaction

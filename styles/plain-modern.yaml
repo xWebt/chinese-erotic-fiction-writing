@@ -1,0 +1,54 @@
+id: plain-modern
+label: 现代白话主声线
+role: primary
+status: provisional
+source:
+  title: 重生之官路商途
+  author: 更俗
+  scenes_read: 6
+  measured_cjk: 84206
+voice:
+  pov: third-limited
+  distance: close but externally legible
+  tense: past
+  narrator_attitude: pragmatic, observant, lightly ironic
+sentence:
+  median: 42.0
+  mean: 50.2
+  target_range: [28, 48]
+  variation: long information sentences mixed with one-line dialogue and short reactions
+paragraph:
+  median: 51.0
+  one_sentence_ratio: 0.665
+  short_narrative_run_max: 2
+thresholds:
+  sentence_median: [30, 48]
+  dialogue_ratio: [0.14, 0.30]
+  max_short_narrative_run: 2
+  max_action_chain: 2
+  metaphor_per_1000_max: 2.5
+  prop_exposition_max: 0
+dialogue:
+  ratio: 0.279
+  texture: practical, regional, status-aware; often carries exposition and conflict
+  information_flow: dialogue and visible action before explanation
+metaphor:
+  per_1000: 0.70
+  allowed_sources:
+    - 1990s city life
+    - cars, documents, food, streets, office objects
+scene:
+  opening: start after pressure already exists; establish place through one usable object
+  progression: decisions alter access, information, money or status
+  ending: consequence or next move
+  erotic_content: not used from this anchor due age-boundary concerns
+learn:
+  - modern Mandarin with concrete professional detail
+  - dialogue as information delivery
+  - clean transitions without decorative prose
+  - stakes expressed through money, access, reputation and timing
+do_not_copy:
+  - long-winded recaps
+  - female objectification
+  - repetitive praise of the protagonist
+  - adult sexual framing of minors

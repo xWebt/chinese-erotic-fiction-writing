@@ -1,0 +1,15 @@
+id: affair
+label: 偷情与隐瞒
+aliases: [婚外, 秘密关系]
+core_tension: 欲望与风险都来自不能被知道
+setting: [酒店, 旧公寓, 聚会后台, 出差城市]
+progression:
+  - 公开场合维持原角色
+  - 私下接触
+  - 一个可能暴露的细节
+  - 说谎或掩饰
+  - 回到原关系位置
+turn: 伴侣来电、熟人撞见、遗留物被发现、说错称呼
+ending_modes: [消除证据, 故意留下线索, 一方要求结束]
+avoid: [只用道德审判代替人物选择, 把隐瞒写成浪漫]
+profile_modules: [first-person-comic]

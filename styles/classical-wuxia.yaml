@@ -1,0 +1,44 @@
+id: classical-wuxia
+label: 传统武侠结构
+role: structure-module
+status: provisional
+source:
+  title: 十景缎
+  author: 本地文本未署名
+  scenes_read: 6
+  measured_cjk: 121903
+voice:
+  pov: third-limited with ensemble views
+  distance: clear external blocking, selective interiority
+  tense: past
+  narrator_attitude: restrained, dramatic through action
+sentence:
+  median: 23.0
+  mean: 27.0
+  target_range: [15, 30]
+  variation: compact action clauses, occasional longer period sentences
+paragraph:
+  median: 72.0
+  one_sentence_ratio: 0.228
+  short_narrative_run_max: 2
+dialogue:
+  ratio: 0.334
+  texture: courteous on the surface, status and threat underneath
+  information_flow: dialogue, gesture and spatial position
+metaphor:
+  per_1000: 0.62
+  allowed_sources:
+    - landscape, architecture, fabric, weather
+scene:
+  opening: person in place with an immediate social or physical problem
+  progression: action blocking stays legible; alliances and injuries change
+  ending: reveal, decision or physical consequence
+  erotic_content: not used due source ambiguity
+learn:
+  - scene blocking and multi-character action clarity
+  - dialogue with hidden rank and intention
+  - setup and payoff without narrator explanation
+do_not_copy:
+  - classical cadence as default prose
+  - poetic body descriptions
+  - intimate scenes with unclear age or consent

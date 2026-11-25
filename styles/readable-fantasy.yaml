@@ -1,0 +1,46 @@
+id: readable-fantasy
+label: 高可读性冒险长篇
+role: pacing-module
+status: provisional
+source:
+  title: 龙战士传说
+  author: 半只青蛙
+  scenes_read: 6
+  measured_cjk: 122742
+voice:
+  pov: third-limited with later first-person sections
+  distance: medium
+  tense: past
+  narrator_attitude: direct, dramatic, sometimes flippant
+sentence:
+  median: 27.0
+  mean: 31.9
+  target_range: [18, 36]
+  variation: exposition runs alternate with blunt short lines
+paragraph:
+  median: 40.0
+  one_sentence_ratio: 0.619
+  short_narrative_run_max: 4
+dialogue:
+  ratio: 0.191
+  texture: blunt, often comic, rank and family relations are explicit
+  information_flow: exposition before action, then dialogue to redefine stakes
+metaphor:
+  per_1000: 0.48
+  allowed_sources:
+    - elemental and battlefield imagery
+    - domestic and bodily comparisons
+scene:
+  opening: state the current world problem plainly
+  progression: abilities, factions and personal wants escalate
+  ending: next challenge or emotional beat
+  erotic_content: not used as a prose benchmark
+learn:
+  - readable long-form escalation
+  - simple transitions between exposition and action
+  - desire and adventure can share one main line
+do_not_copy:
+  - info dumps
+  - typos and inconsistent names
+  - blunt exposition for every new concept
+  - formulaic power fantasy

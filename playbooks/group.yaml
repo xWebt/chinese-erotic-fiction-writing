@@ -1,0 +1,15 @@
+id: group
+label: 多人与空间调度
+aliases: [三人, 多人, 群戏]
+core_tension: 每个人都要有位置、目的和会改变局面的动作
+setting: [酒店套房, 私人聚会, 大型车内, 指定场地]
+progression:
+  - 确定空间与参与者
+  - 两人形成焦点
+  - 第三人加入打断节奏
+  - 注意力重新分配
+  - 有人退出或接管
+turn: 有人被冷落、有人停下、规则被改变
+ending_modes: [重组关系, 一人离场, 留下下一次安排]
+avoid: [人数增加句子也变长, 每个人同时做三件事, 把围观当默认同意]
+profile_modules: [adult-adventure]

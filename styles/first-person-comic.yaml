@@ -1,0 +1,46 @@
+id: first-person-comic
+label: 第一人称机灵叙事
+role: module
+status: provisional
+source:
+  title: 阿里布达年代记
+  author: 罗森
+  scenes_read: 6
+  measured_cjk: 64739
+voice:
+  pov: first-person
+  distance: very close
+  tense: past with direct commentary
+  narrator_attitude: self-aware, cynical, playful, unreliable
+sentence:
+  median: 28.0
+  mean: 32.4
+  target_range: [18, 35]
+  variation: short jokes, direct statements, occasional explanatory runs
+paragraph:
+  median: 44.5
+  one_sentence_ratio: 0.565
+  short_narrative_run_max: 2
+dialogue:
+  ratio: 0.123
+  texture: confrontational, teasing, status-aware
+  information_flow: narrator frames the joke; dialogue disrupts or raises stakes
+metaphor:
+  per_1000: 1.20
+  allowed_sources:
+    - narrator's immediate comparison
+    - fantasy travel and household objects
+scene:
+  opening: voice-first with a clear opinion or complaint
+  progression: plans collide with ego, lust or misinformation
+  ending: joke with consequences, not neutral summary
+  erotic_content: quarantined due coercive material in source
+learn:
+  - first-person voice can disagree with itself
+  - humor exposes character rather than pausing the scene
+  - information can be withheld in a recognizably biased voice
+do_not_copy:
+  - juvenile sex jokes
+  - repetitive harem cataloguing
+  - non-consensual sexual framing
+  - long digressions without consequence

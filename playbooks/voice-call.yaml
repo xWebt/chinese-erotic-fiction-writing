@@ -1,0 +1,16 @@
+id: voice-call
+label: 电话与语音
+aliases: [通话, 远程指令]
+core_tension: 看不见对方，只能靠声音判断
+setting: [异地通话, 公共空间耳机, 车内蓝牙, 语音消息]
+progression:
+  - 普通通话
+  - 语气变化被听出
+  - 背景声音制造风险
+  - 对方提出选择或要求
+  - 挂断后的空白
+turn: 第三个人在背景里说话、录音提示、信号中断
+ending_modes: [重拨, 不回消息, 留下语音]
+dialogue_vectors: [遮掩, 命令, 停顿, 误解]
+avoid: [双方轮流说完整长句, 用大量省略号代替节奏]
+profile_modules: [first-person-comic]

@@ -1,0 +1,15 @@
+id: hotel-night
+label: 酒店与旅途
+aliases: [出差, 旅店, 异地]
+core_tension: 陌生空间降低日常约束，也制造新的暴露和身份风险
+setting: [酒店走廊, 房间, 电梯, 旅途中的临时住所]
+progression:
+  - 入住与空间确认
+  - 门卡、走廊声或隔壁房间制造压力
+  - 关系在封闭空间里变化
+  - 外界打扰
+  - 第二天如何面对
+turn: 门卡失效、隔壁听见、身份被揭穿
+ending_modes: [各自回房, 留下房卡, 改变行程]
+avoid: [把酒店写成无规则真空, 忽略第二天后果]
+profile_modules: [adult-adventure]

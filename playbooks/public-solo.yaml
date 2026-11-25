@@ -1,0 +1,17 @@
+id: public-solo
+label: 单人半公共空间
+aliases: [外出自慰, 自我暴露]
+core_tension: 人物自己决定承担多少暴露风险
+setting: [夜间洗衣房, 试衣间, 河堤, 楼梯间, 24小时店外]
+progression:
+  - 出门前做选择
+  - 到达地点并确认空间
+  - 第一次差点被发现
+  - 本来可以停止，却继续
+  - 完成或被外界打断
+turn: 人物主动拿开遮挡；有人接近；声音暴露；她自己突然清醒
+turning_choice: 停、走、继续，必须明确
+ending_modes: [迅速离开, 留在原地恢复, 决定下一次]
+internal_access: 只写具体注意力，不写长篇自我分析
+avoid: [作者替人物羞耻, 连续短句装紧张, 把外界人物写成工具]
+profile_modules: [adult-adventure]

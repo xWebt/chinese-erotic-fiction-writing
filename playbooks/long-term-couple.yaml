@@ -1,0 +1,15 @@
+id: long-term-couple
+label: 长期伴侣
+aliases: [夫妻, 熟悉关系, 冷淡期]
+core_tension: 熟悉让动作不需要证明，真正的问题是关系里没说出的事
+setting: [家, 旧房子, 夜间厨房, 共同旅行]
+progression:
+  - 日常摩擦
+  - 旧事被提起
+  - 身体靠近
+  - 旧问题仍在
+  - 选择继续或停下来谈
+turn: 一方不再配合原来的角色，第一次说出真实需求
+ending_modes: [未解决的谈话, 日常动作变化, 新的约定]
+avoid: [把婚姻只写成厌倦, 用回忆代替当下选择]
+profile_modules: [first-person-comic]

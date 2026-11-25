@@ -1,104 +1,91 @@
-# Chinese Erotic Fiction Writing — Agent Instructions
+# Agent Instructions
 
-This repo is a **white-paper toolkit** for writing Chinese adult (H) fiction.
-It provides methodology, not defaults. Every user opens a blank page.
+## Priority
 
-## Architecture (Three Layers)
+1. User requirements and taboos.
+2. `SKILL.md`.
+3. `core/prose-rules.md`.
+4. `styles/plain-modern.yaml`.
+5. One playbook and at most one optional module.
 
-| Layer | Location | Content | Public? |
-|---|---|---|---|
-| L1 Universal | `SKILL.md` + `references/` | Pure technique methodology | Yes |
-| L2 Accumulated | `references/` (de-personalized) | Cross-user pattern extraction | Yes |
-| L3 Session Capsule | `sessions/` (local only) | Per-user preferences, feedback log, style fingerprint | **Never** |
+Do not load the whole repository before writing.
 
-## Privacy Design (P0)
+## Runtime
 
-- `sessions/` is in `.gitignore` — never committed, never pushed
-- All reference files are de-personalized (角色名 → [女主]/[男主], 场景 → [地点])
-- Each user's kinks, characters, and play preferences stay local
-- The GitHub repo contains zero user identities
+- `core/` contains reusable writing rules.
+- `styles/` contains corpus-derived style fingerprints.
+- `playbooks/` contains one-scene structure cards.
+- `harness/` contains local profiling and audit tools.
+- Legacy long-form references are removed.
 
-## Mandatory Investigation (FIRST thing for any new user)
+## Investigation
 
-Ask these questions before writing anything. Never assume defaults:
+When details are missing, infer:
 
-1. **Gender / Voice**: Male → direct, raw (器官直呼名). Female → atmospheric, sensual. Ask if unsure.
-2. **Play Types & Taboos**: What kinks? What's forbidden? Record taboos as hard constraints.
-3. **Genre & Format**: Setting, perspective, H-scene ratio, words per chapter.
-4. **Style References**: Any reference works to learn from?
+- adults, consensual;
+- third-person limited;
+- modern setting;
+- `plain-modern` style;
+- no fixed word count.
 
-Save results to `sessions/{user_id}.yaml`. Re-read this file on subsequent sessions.
+Ask only when taboo, POV, existing characters, or explicit style references make the scene ambiguous.
 
-## Session Capsule (The Learning Loop)
+## Scene Contract
 
-Each session makes the skill smarter for that specific user:
+Every scene must contain:
 
-1. **First use** → investigation → create capsule → write preferences
-2. **Returning** → read capsule → skip basics → ask "what's new this time?"
-3. **Feedback received** → parse the correction → append to feedback_log → update style_fingerprint
-4. **Passage satisfied** → extract technique density → update fingerprint → next gen auto-matches
-5. **Over time** → feedback_log = personalized pitfall list → fingerprint converges to user's taste
+- POV;
+- want;
+- obstacle;
+- tactic;
+- turn;
+- consequence.
 
-Capsule structure is documented in `SKILL.md` session learning section.
+If a scene does not change information, distance, power, risk, relationship, or next action, rewrite it.
 
-## Core Writing Rules
+## Voice
 
-- **Body first**: 发烫/战栗/湿透/咬唇/腿软/收缩/喷水/脚趾蜷缩. Show, don't narrate.
-- **Orgasm full chain**: 痉挛 → 弓起 → 脚尖绷直 → 收缩 → 喷涌 → 眼前发白 → 脱力. Never one line.
-- **Sound + liquid always paired**: 啧啧/咕叽/噗嗤 + 汩汩/顺着淌. No "dry action."
-- **Multi-dimensional**: Each body part across 3-4 dimensions (shape/touch/sound/sight/state). See `references/carnal-writing-techniques.md`.
-- **Organ naming per investigation**: No default terms. Ask first.
-- **Minimal filler**: 2-3 lines for scene setting, then straight to H/body/psychology.
-- **Chapter structure**: Intro (2-3 lines) → setup → H body (2-4 rounds) → climax → hook.
+- Modern spoken Chinese.
+- Concrete action and dialogue before explanation.
+- Never use signs, screens, or narration as an instruction card.
+- Do not chain nodding, pointing, turning and walking in one paragraph.
+- Do not use consecutive short narrative paragraphs for fake rhythm.
+- Sparse metaphor from POV experience.
+- End on a thing that happened, not an epiphany.
 
-## Local Tools (harness/ CLI)
+## Intimacy
 
-Pure local operations, no API dependency:
+- Adults only.
+- Explicit, revocable consent.
+- Body detail is selective, not a checklist.
+- No mandatory sound/liquid pair.
+- No fixed climax chain.
+- Aftermath must change something concrete.
 
-- `novel index -d <corpus_dir>` — Scan .txt novel library, build searchable index
-- `novel calibrate -a <anchor_file> ...` — Calibrate quality thresholds from known-good works
-- `novel wordcount <file>` — Per-chapter word count
-- `novel stats` — Index statistics
+## Corpus Work
 
-Install: `pip install -e .`
+- `novel styleprofile` for aggregate metrics.
+- `novel scenes` for at most six bounded scene windows.
+- Never dump whole books into context.
+- Never copy source text into public files.
+- Keep local paths and titles out of public artifacts when not needed.
 
-## Prompt Templates
+## Editing
 
-`harness/prompt_templates.py` contains structured prompts for:
-- Play type discovery from corpus passages
-- Atomic playbook extraction (iron rules + escalation axes + scene templates)
-- Cross-combining playbooks into novel variants
-- Chapter outline and scene generation
-- Style reference injection
+- Preserve unrelated user changes.
+- Use batch edits for repository work.
+- Keep `SKILL.md` an entry point, not a manual.
+- Add details to `core/` or one playbook rather than duplicating rules.
+- Test with `python -m unittest discover -s tests -v`.
 
-The Agent reads these templates and executes them with its own LLM backend.
+## Token Discipline
 
-## Key Workflows
+- One primary style, one optional module, one playbook.
+- One style audit on the complete draft.
+- One targeted revision pass.
+- Do not narrate every tool call.
+- Separate project maintenance from fiction writing threads.
 
-### Revision
-Sync feedback → update outline → regenerate → self-review → deliver. Never patch.
+## Privacy
 
-### Multi-session writing
-Maintain `进度.txt` in the output directory. Update at each session end, read first on resume.
-
-### Batch expansion
-Use `scripts/batch_insert.py`. Anchor = unique original sentence (20-60 chars). Insert in descending order. Verify with `novel wordcount` after each round.
-
-## Reference Files
-
-All reference files are de-personalized technique templates extracted from corpus (no real names/paths).
-- `references/carnal-writing-techniques.md` — High-density technique: organ dimensions, sound/liquid pairing, climax chains
-- `references/quiet-exposure-techniques.md` — Exhibitionism (悄悄露出): near-miss exposure tension
-- `references/tech-toy-play-techniques.md` — Sex toys / remote control: edge-play & power of the dial
-- `references/domination-training-techniques.md` — Dom/sub (调教): orgasm-permission system & reward/punish loop
-- `references/group-play-techniques.md` — Group / orgy: spatial choreography & role division
-
-## Critical Pitfalls
-
-- **White paper rule (P0)**: Never bind to any play type, voice, or word count. Everything from investigation.
-- Don't deliver half-finished work. Self-review: climax count, chapter numbering, pronoun consistency.
-- Environment/setup ≤ 40% per chapter.
-- When expanding: ADD new content, don't rephrase existing.
-- Person pronoun consistency: 她/他/朕/本王 get mixed during insertion. Proofread.
-- Anchor nesting: never use previously-inserted text as new anchor.
-- Never use large-block patch (over half chapter). Patch only for ≤200 char insertions.
+`sessions/`, corpora, manuscripts and local file paths stay local. Public profiles contain only abstract metrics and de-identified notes.

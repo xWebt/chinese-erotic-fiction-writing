@@ -1,0 +1,15 @@
+id: bathhouse
+label: 浴室与温泉
+aliases: [浴场, 桑拿, 温泉]
+core_tension: 水汽、声音和遮挡让距离不断变化
+setting: [私人浴室, 温泉旅馆, 桑拿房, 泳池更衣区]
+progression:
+  - 水声与空间距离
+  - 表面普通的接触
+  - 遮挡失效
+  - 水声或脚步暴露
+  - 离开或继续
+turn: 有人进入、门牌翻转、水面声音改变
+ending_modes: [回到公共区域, 留下一件物品, 改变约定]
+avoid: [连续水声词, 全身感官清单, 把公共空间写成无人]
+profile_modules: [adult-adventure]

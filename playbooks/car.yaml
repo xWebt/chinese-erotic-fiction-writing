@@ -1,0 +1,15 @@
+id: car
+label: 车内
+aliases: [停车场, 夜车]
+core_tension: 空间小、随时可能有人靠近、不能立刻整理
+setting: [地下停车场, 路边, 自驾途中, 代驾到来前]
+progression:
+  - 停车后外部声音出现
+  - 车窗起雾或灯光扫过
+  - 动作被迫缩短
+  - 有人靠近或电话响起
+  - 在离开前做决定
+turn: 敲窗、抬杆、车灯、后座物件掉落
+ending_modes: [开车离开, 整理痕迹, 留下未解决的问题]
+avoid: [把车写成与外界隔绝的床, 只用震动形容词]
+profile_modules: [adult-adventure]

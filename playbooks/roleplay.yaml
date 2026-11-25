@@ -1,0 +1,15 @@
+id: roleplay
+label: 身份角色扮演
+aliases: [制服, 称谓, 场景扮演]
+core_tension: 称谓和角色改变说话方式，不改变人物本身
+setting: [酒店房间, 摄影棚, 私人空间, 主题聚会]
+progression:
+  - 进入角色
+  - 现实习惯渗进来
+  - 角色说错话
+  - 边界被重新确认
+  - 继续或停下
+turn: 称呼突然改回真名，或现实事件打断
+ending_modes: [退出角色, 保留一个称呼, 关系发生偏移]
+avoid: [只靠服装和台词, 把角色支配当成现实授权]
+profile_modules: [first-person-comic]

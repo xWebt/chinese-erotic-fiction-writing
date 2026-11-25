@@ -3,7 +3,11 @@
 Pure local tools — no API dependency, no configuration file needed.
 Commands:
     novel index       Build corpus index from .txt files
+    novel styleprofile  Summarize prose style from local text files
+    novel scenes        Extract diverse bounded scenes for close reading
+    novel tokenaudit    Audit Codex session token use
     novel calibrate   Compute anchor baseline
+    novel stylecheck  Audit prose rhythm and AI-tone risks
     novel wordcount   Count words in a file
     novel stats       Show corpus index statistics
 """
@@ -19,6 +23,84 @@ def main():
     """Chinese Fiction Harness — local tools for novel writing assistance."""
 
 
+# ── tokenaudit ────────────────────────────────────────
+
+@main.command()
+@click.argument("session_file")
+@click.option("--budget", type=int, default=1_000_000, show_default=True)
+@click.option("--json", "as_json", is_flag=True, help="Print JSON")
+def tokenaudit(session_file, budget, as_json):
+    """Summarize exact token usage from a Codex JSONL session."""
+    from rich.table import Table
+    from .token_audit import audit_session, to_json
+
+    report = audit_session(session_file, budget=budget)
+    if as_json:
+        click.echo(to_json(report))
+        return
+    if error := report.get("error"):
+        raise click.ClickException(error)
+
+    table = Table(title="Session Token Use")
+    table.add_column("Metric", style="cyan")
+    table.add_column("Value", justify="right")
+    table.add_row("Responses", str(report["responses"]))
+    for key, value in report["thread"].items():
+        table.add_row(key, f"{value:,}")
+    table.add_row("context overhead", f"{report['overhead_ratio']:.1%}")
+    table.add_row("visible output", f"{report['output_ratio']:.1%}")
+    console.print(table)
+    for warning in report["warnings"]:
+        console.print(f"[yellow]{warning}[/yellow]")
+
+
+# ── scenes ────────────────────────────────────────────
+
+@main.command()
+@click.argument("filepath")
+@click.option("--count", type=int, default=6, show_default=True)
+@click.option("--chars", type=int, default=1200, show_default=True)
+def scenes(filepath, count, chars):
+    """Extract complete bounded scenes for corpus-style close reading."""
+    from .scene_sampler import render_scenes, sample_file
+
+    sampled = sample_file(filepath, count=count, target_chars=chars)
+    if not sampled:
+        raise click.ClickException("No usable scenes found")
+    click.echo(render_scenes(sampled))
+
+
+# ── styleprofile ──────────────────────────────────────
+
+@main.command()
+@click.argument("paths", nargs=-1, required=True)
+@click.option("--limit", type=int, default=30, show_default=True)
+@click.option("--json", "as_json", is_flag=True, help="Print JSON")
+def styleprofile(paths, limit, as_json):
+    """Summarize prose rhythm from local .txt files or directories."""
+    from rich.table import Table
+    from .corpus_style import profile_paths, to_json
+
+    report = profile_paths(paths, limit=limit)
+    if as_json:
+        click.echo(to_json(report))
+        return
+
+    if not report.get("sample_count"):
+        raise click.ClickException("No usable .txt samples found")
+
+    table = Table(title=f"Corpus Style Profile ({report['sample_count']} samples)")
+    table.add_column("Metric", style="cyan")
+    table.add_column("P25", justify="right")
+    table.add_column("Median", justify="right")
+    table.add_column("P75", justify="right")
+    for key, values in report.items():
+        if isinstance(values, dict) and {"p25", "median", "p75"} <= values.keys():
+            table.add_row(key, str(values["p25"]), str(values["median"]), str(values["p75"]))
+    console.print(table)
+    console.print("[dim]Use the summary first; inspect at most 3 short excerpts.[/dim]")
+
+
 # ── index ─────────────────────────────────────────────
 
 @main.command()
@@ -30,7 +112,7 @@ def index(corpus_dir, db, anchor, min_score):
     """Build corpus index from local .txt novel files.
 
     Walks the corpus directory, auto-detects encoding (UTF-8/GBK),
-    filters low-quality content, deduplicates, scores technique density,
+    filters low-quality content, deduplicates, scores retrieval signals,
     classifies play types, and stores results in SQLite.
     """
     from .corpus_indexer import build_index
@@ -47,7 +129,7 @@ def index(corpus_dir, db, anchor, min_score):
 @click.option("--strictness", "-s", type=float, default=0.5, help="Threshold strictness 0-1 (default 0.5)")
 @click.option("--output", "-o", default=None, help="Save baseline JSON")
 def calibrate(db, anchor, strictness, output):
-    """Compute technique density baseline from anchor works.
+    """Compute retrieval-signal baseline from anchor works.
 
     Uses named anchor works to establish reference distributions for
     scoring thresholds across all technique dimensions.
@@ -130,6 +212,75 @@ def wordcount(filepath, threshold):
     console.print(table)
 
 
+# ── stylecheck ────────────────────────────────────────
+
+@main.command()
+@click.argument("filepath")
+@click.option("--json", "as_json", is_flag=True, help="Print the full report as JSON")
+@click.option("--profile", "profile_id", default=None, help="Compare against a style profile")
+def stylecheck(filepath, as_json, profile_id):
+    """Audit prose for AI-tone risks and repetitive sentence patterns."""
+    import os
+    from rich.table import Table
+    from .style_audit import audit_text, report_to_json
+
+    if not os.path.exists(filepath):
+        raise click.ClickException(f"File not found: {filepath}")
+
+    with open(filepath, encoding="utf-8") as f:
+        text = f.read()
+
+    report = audit_text(text)
+    if profile_id:
+        from .style_profiles import evaluate_profile, load_style
+
+        report["profile_findings"] = evaluate_profile(report, load_style(profile_id))
+        report["warnings"].extend(report["profile_findings"])
+    if as_json:
+        click.echo(report_to_json(report))
+        return
+
+    summary = report["summary"]
+    risk = summary["risk_level"]
+    risk_color = {"low": "green", "moderate": "yellow", "high": "red"}[risk]
+    overview = Table(title=f"Style Audit: {filepath}")
+    overview.add_column("Metric", style="cyan")
+    overview.add_column("Value", style="green")
+    overview.add_row("Risk score", f"{summary['risk_score']}/100")
+    overview.add_row("Risk level", f"[{risk_color}]{risk}[/{risk_color}]")
+    overview.add_row("Characters", str(summary["char_count"]))
+    overview.add_row("Sentences", str(summary["sentence_count"]))
+    overview.add_row("Dialogue share", f"{summary['dialogue_ratio']:.1%}")
+    overview.add_row("Mean sentence length", str(report["sentence_stats"]["mean"]))
+    overview.add_row("Sentence length stdev", str(report["sentence_stats"]["stdev"]))
+    overview.add_row("Metaphor / 1k chars", str(report["style_markers"]["metaphor_per_1000_chars"]))
+    overview.add_row("AI elevation hits", str(sum(report["ai_elevation_patterns"].values())))
+    overview.add_row("Purple-prose hits", str(report["style_markers"]["purple_prose_count"]))
+    overview.add_row("Prop exposition hits", str(report["style_markers"]["prop_exposition_count"]))
+    overview.add_row("Max action chain", str(report["style_markers"]["max_action_chain"]))
+    overview.add_row("Max short narrative run", str(report["style_markers"]["max_short_narrative_run"]))
+    console.print(overview)
+
+    if report["warnings"]:
+        warnings = Table(title="Risk Signals")
+        warnings.add_column("Level", style="cyan", no_wrap=True)
+        warnings.add_column("Signal", style="magenta", no_wrap=True)
+        warnings.add_column("Revision cue", style="white")
+        for warning in report["warnings"]:
+            level = warning["level"]
+            level_color = {"low": "green", "medium": "yellow", "high": "red"}[level]
+            warnings.add_row(
+                f"[{level_color}]{level}[/{level_color}]",
+                warning["code"],
+                warning["message"],
+            )
+        console.print(warnings)
+    else:
+        console.print("[green]No major prose-risk signals found.[/green]")
+
+    console.print("[dim]Signals are revision prompts, not a literary verdict.[/dim]")
+
+
 # ── stats ─────────────────────────────────────────────
 
 @main.command()
@@ -153,7 +304,7 @@ def stats(db):
     t1.add_column("Value", style="green")
     t1.add_row("Total passages", str(total))
     t1.add_row("Anchor passages", str(anchor_count))
-    t1.add_row("Avg technique score", f"{avg_score:.1f}")
+    t1.add_row("Avg retrieval score", f"{avg_score:.1f}")
     console.print(t1)
 
     from .corpus_indexer import PLAY_PATTERNS

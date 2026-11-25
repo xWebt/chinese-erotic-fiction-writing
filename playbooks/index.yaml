@@ -1,0 +1,19 @@
+primary_rules: core/prose-rules.md
+default_style: plain-modern
+playbooks:
+  - quiet-exposure
+  - remote-toy
+  - public-solo
+  - mirror
+  - car
+  - office-after-hours
+  - affair
+  - voice-call
+  - power-exchange
+  - roleplay
+  - group
+  - long-term-couple
+  - stranger-brief
+  - hotel-night
+  - bathhouse
+one_playbook_per_scene: true

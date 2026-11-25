@@ -1,0 +1,15 @@
+id: power-exchange
+label: 权力交换与许可
+aliases: [调教, 主奴, 控制]
+core_tension: 谁有权决定开始、暂停和结束
+setting: [私人空间, 酒店, 指定房间, 远程指令]
+progression:
+  - 确认规则
+  - 试探
+  - 故意违令或失误
+  - 中断或惩罚
+  - 事后反馈和重新协商
+turn: 被控者主动提出要求，权力关系反过来改变
+ending_modes: [事后确认, 修改规则, 关系重新排列]
+avoid: [把疼痛强度当张力, 忽略边界, 把沉默当服从]
+profile_modules: [adult-adventure]

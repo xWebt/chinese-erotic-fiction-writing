@@ -1,0 +1,15 @@
+id: office-after-hours
+label: 办公室加班
+aliases: [下班后, 办公室]
+core_tension: 白天的秩序与夜里的越界共用同一空间
+setting: [空办公室, 会议室, 打印间, 地下车库]
+progression:
+  - 正常会议或加班结束
+  - 门没锁或灯没关
+  - 桌面、文件、衣物成为障碍
+  - 电话、监控灯或同事返回打断
+  - 必须处理留下的痕迹
+turn: 清洁工刷卡、消息响起、监控灯亮、有人回来拿东西
+ending_modes: [恢复工作状态, 留下物证, 改变称呼或关系]
+avoid: [长篇职场说明, 把权力差默认当同意]
+profile_modules: [adult-adventure]

@@ -88,7 +88,7 @@ def calibrate(db_path: str, anchor_names: list[str]) -> dict:
     }
 
     # Display
-    table = Table(title="锚点作品技法基线")
+    table = Table(title="锚点作品检索基线")
     table.add_column("指标", style="cyan")
     table.add_column("值", style="green")
 

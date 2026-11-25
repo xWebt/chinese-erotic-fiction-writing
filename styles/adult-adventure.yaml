@@ -1,0 +1,46 @@
+id: adult-adventure
+label: 成人冒险场景融合
+role: module
+status: provisional
+source:
+  title: 妖刀记
+  author: 默默猴
+  scenes_read: 6
+  measured_cjk: 123262
+voice:
+  pov: multi-close third
+  distance: close during threat and intimacy, wider for factions and locations
+  tense: past
+  narrator_attitude: dramatic but controlled
+sentence:
+  median: 24.0
+  mean: 29.7
+  target_range: [16, 32]
+  variation: action fragments, hard stops, then longer spatial or emotional sentences
+paragraph:
+  median: 34.0
+  one_sentence_ratio: 0.607
+  short_narrative_run_max: 3
+dialogue:
+  ratio: 0.266
+  texture: varied by rank, faction and threat; interruptions carry power shifts
+  information_flow: action reveals trust, threat or leverage before explanation
+metaphor:
+  per_1000: 1.23
+  allowed_sources:
+    - weapons, weather, fabric, wounds
+    - immediate physical perception
+scene:
+  opening: threat or bodily discomfort before exposition
+  progression: space changes; weapons, clothing and exits matter
+  ending: injury, alliance, exposure or unfinished threat
+  erotic_content: use only scene pressure and consent-aware pacing as abstract patterns
+learn:
+  - adult content can advance plot and trust
+  - spatial clarity improves action and erotic tension
+  - short paragraphs work when they contain new action, not fake mood beats
+do_not_copy:
+  - ornamental body metaphors
+  - elaborate costume inventories
+  - coercive or violent sexual framing
+  - the source's repeated lush descriptions

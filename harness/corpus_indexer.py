@@ -1,7 +1,7 @@
 """Corpus indexer: scan, filter, score, and index the novel corpus.
 
 Walks the corpus directory, auto-detects encoding (GBK/UTF-8), splits into
-passages, applies hard filters, scores technique density, and stores results
+passages, applies hard filters, scores retrieval signals, and stores results
 in a SQLite database for fast retrieval.
 """
 
@@ -15,6 +15,8 @@ from typing import Iterator, Optional
 
 from rich.console import Console
 from rich.progress import Progress, BarColumn, TextColumn, TimeElapsedColumn
+
+from .text_encoding import decode_bytes
 
 console = Console()
 
@@ -167,7 +169,7 @@ DIALOGUE_SCORE = re.compile(
 
 
 def score_passage(text: str) -> tuple[int, dict]:
-    """Score a passage for technique density. Returns (total_score, breakdown)."""
+    """Score a passage for retrieval. Returns (total_score, breakdown)."""
     scores = {}
     scores["sound"] = len(SOUND_WORDS.findall(text))
     scores["liquid"] = len(LIQUID_WORDS.findall(text))
@@ -211,10 +213,9 @@ def classify_passage(text: str) -> list[str]:
 
 def read_file(filepath: Path) -> Optional[str]:
     """Read a file with auto-detected encoding. Returns None on failure."""
-    encoding = detect_encoding(filepath)
     try:
-        with open(filepath, encoding=encoding, errors="replace") as f:
-            return f.read()
+        text, _encoding, score = decode_bytes(filepath.read_bytes())
+        return text if score > -1000 else None
     except Exception:
         return None
 
@@ -437,7 +438,7 @@ def search_passages(
 
 
 def search_anchor_baseline(db_path: str) -> dict:
-    """Compute technique density baseline from anchor works."""
+    """Compute retrieval-signal baseline from anchor works."""
     conn = sqlite3.connect(db_path)
     rows = conn.execute(
         "SELECT score_breakdown, score FROM passages WHERE is_anchor = 1"
