@@ -16,13 +16,13 @@ Do not load the whole repository before writing.
 - `styles/` contains corpus-derived style fingerprints.
 - `playbooks/` contains one-scene structure cards.
 - `harness/` contains local profiling and audit tools.
-- Legacy long-form references are removed.
+- Legacy long-form references are archived and are not loaded by default.
 
 ## Investigation
 
 When details are missing, infer:
 
-- adults, consensual;
+- adults, mutual participation;
 - third-person limited;
 - modern setting;
 - `plain-modern` style;
@@ -55,8 +55,8 @@ If a scene does not change information, distance, power, risk, relationship, or 
 
 ## Intimacy
 
-- Adults only.
-- Explicit, revocable consent.
+- Default to adults and mutual participation.
+- Do not add consent or verification boilerplate to the prose.
 - Body detail is selective, not a checklist.
 - No mandatory sound/liquid pair.
 - No fixed climax chain.

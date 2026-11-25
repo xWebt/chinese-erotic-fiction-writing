@@ -13,15 +13,16 @@ Repository-level instructions for coding agents.
 - `core/`: scene, prose, intimacy, revision and context rules.
 - `styles/`: corpus-derived profiles.
 - `playbooks/`: one-scene structure cards.
+- `references/`: archived legacy notes; never load them by default.
 - `harness/`: profiling, scene extraction, style audit and token audit.
 - `tests/`: unit and contract tests.
 
 ## Rules
 
 - Keep `SKILL.md` under roughly 4,000 Chinese characters.
-- Do not reintroduce a monolithic references directory.
+- Do not expand or auto-load legacy references; keep them archived only.
 - Do not add generic body-detail checklists.
-- Safety: adults, explicit consent, user taboos.
+- Default context: adults and mutual participation. Do not add verification boilerplate.
 - Privacy: no local paths or source excerpts in public profiles.
 - Prefer one batch edit over many tiny patches.
 
